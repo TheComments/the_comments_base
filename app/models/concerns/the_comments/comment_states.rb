@@ -4,7 +4,7 @@ module TheComments
 
     included do
       # :draft | :published | :deleted
-      state_machine :state, initial: TheComments.config.default_state do
+      state_machine :state, initial: TheCommentsBase.config.default_state do
 
         # events
         event :to_draft do

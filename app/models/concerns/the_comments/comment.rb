@@ -18,10 +18,10 @@ module TheComments
       # 4. Comments State Machine
       #
       include ::TheSimpleSort::Base
-      include ::TheComments::AntiSpam
       include ::TheSortableTree::Scopes
       include ::TheComments::CommentStates
-      include ::TheCommentsSubscriptions::CommentSubscription::Comment
+      include ::TheCommentsAntispamServices::Base
+      include ::TheCommentsSubscriptions::Comment
 
       validates :raw_content, presence: true
 
@@ -83,7 +83,7 @@ module TheComments
     end
 
     def define_default_state
-      self.state = TheComments.config.default_owner_state if user && user == holder
+      self.state = TheCommentsBase.config.default_owner_state if user && user == holder
     end
 
     def denormalize_commentable

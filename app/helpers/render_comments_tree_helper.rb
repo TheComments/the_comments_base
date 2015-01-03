@@ -40,7 +40,7 @@ module RenderCommentsTreeHelper
         @h, @options = h, options
         @comment     = options[:node]
 
-        @max_reply_depth = options[:max_reply_depth] || TheComments.config.max_reply_depth
+        @max_reply_depth = options[:max_reply_depth] || TheCommentsBase.config.max_reply_depth
 
         if @comment.draft?
           draft_comment

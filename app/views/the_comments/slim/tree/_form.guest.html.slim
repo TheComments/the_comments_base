@@ -8,7 +8,7 @@ label= t('the_comments.form.content')
 p= f.text_area :raw_content, class: 'form-control'
 
 p.trap
-  - TheComments.config.empty_inputs.each do |name|
+  - TheCommentsBase.config.empty_inputs.each do |name|
     = text_field_tag name, nil, autocomplete: :off, tabindex: -1, id: nil
 
 = render partial: comment_template('tree/form.hidden_fields'), locals: { f: f, commentable: commentable }

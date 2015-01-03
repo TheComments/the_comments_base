@@ -3,7 +3,7 @@ module TheComments
     extend ActiveSupport::Concern
 
     included do
-      include ::TheCommentsSubscriptions::ModelRelations
+      include ::TheCommentsSubscriptions::Relations
 
       has_many :comcoms, class_name: :Comment, foreign_key: :holder_id
     end

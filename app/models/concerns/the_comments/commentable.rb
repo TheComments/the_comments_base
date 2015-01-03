@@ -26,7 +26,7 @@ module TheComments
 
     # => 'My first blog post'
     def commentable_title
-      try(:title) || TheComments.config.default_title
+      try(:title) || TheCommentsBase.config.default_title
     end
 
     # => '/posts/1'

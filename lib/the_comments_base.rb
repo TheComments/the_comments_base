@@ -1,6 +1,7 @@
 _root_ = File.expand_path('../../',  __FILE__)
 
 require "the_comments_base/version"
+require "the_comments_base/config"
 
 require 'jbuilder'
 require 'the_notification'
@@ -16,8 +17,8 @@ module TheCommentsBase
     # 1. Removing all the require / require_relative
     # 2. Add needed paths to Rails autoload paths
     # 3. Put files at the right places with the right names so Rails can infer where to look for code to load.
-    config.autoload_paths << "#{ config.root }/app/models/concerns/the_comments/**"
-    config.autoload_paths << "#{ config.root }/app/controllers/concerns/the_comments/**"
+    # config.autoload_paths << "#{ config.root }/app/models/concerns/the_comments/**"
+    # config.autoload_paths << "#{ config.root }/app/controllers/concerns/the_comments/**"
   end
 
   # simple and almost perfect

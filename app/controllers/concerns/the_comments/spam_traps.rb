@@ -9,8 +9,8 @@ module TheComments
       before_action :ajax_requests_required,  only: :create
       before_action :cookies_required,        only: :create
 
-      before_action :empty_trap_required,     only: :create, if: -> { TheComments.config.empty_trap_protection }
-      before_action :tolerance_time_required, only: :create, if: -> { TheComments.config.tolerance_time_protection }
+      before_action :empty_trap_required,     only: :create, if: -> { TheCommentsBase.config.empty_trap_protection }
+      before_action :tolerance_time_required, only: :create, if: -> { TheCommentsBase.config.tolerance_time_protection }
     end
 
     private
@@ -35,7 +35,7 @@ module TheComments
     # 2) fields can be removed on client side
     def empty_trap_required
       is_human = true
-      params.slice(*TheComments.config.empty_inputs).values.each{|v| is_human = (is_human && v.blank?) }
+      params.slice(*TheCommentsBase.config.empty_inputs).values.each{|v| is_human = (is_human && v.blank?) }
 
       if !is_human
         k = t('the_comments.trap')
@@ -46,7 +46,7 @@ module TheComments
 
     def tolerance_time_required
       this_time = params[:tolerance_time].to_i
-      min_time  = TheComments.config.tolerance_time.to_i
+      min_time  = TheCommentsBase.config.tolerance_time.to_i
 
       if this_time < min_time
         tdiff = min_time - this_time
