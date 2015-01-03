@@ -1,4 +1,13 @@
+_root_ = File.expand_path('../../',  __FILE__)
+
 require "the_comments_base/version"
+
+require 'jbuilder'
+require 'the_notification'
+require 'the_sortable_tree'
+
+require 'state_machine'
+require 'state_machine/version'
 
 module TheCommentsBase
   class Engine < Rails::Engine
@@ -18,5 +27,24 @@ module TheCommentsBase
   # "  hello @ world .com  " => "hello@world.com"
   def self.normalize_email str
     str.to_s.squish.strip.gsub(/\s*/, '')
+  end
+end
+
+# Routing cocerns loading
+require "#{ _root_ }/config/routes"
+
+if StateMachine::VERSION.to_f <= 1.2
+  puts '~' * 50
+  puts 'WARNING!'
+  puts '~' * 50
+  puts 'TheComments >>> StateMachine patch for Rails 4 will be applied'
+  puts
+  puts '> private method *around_validation* from StateMachine::Integrations::ActiveModel will be public'
+  puts
+  puts 'https://github.com/pluginaweek/state_machine/issues/295'
+  puts 'https://github.com/pluginaweek/state_machine/issues/251'
+  puts '~' * 50
+  module StateMachine::Integrations::ActiveModel
+    public :around_validation
   end
 end
