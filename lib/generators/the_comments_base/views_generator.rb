@@ -60,10 +60,11 @@ BANNER
 
       def js_copy
         %w[
-          the_comments
-          the_comments_default_notificator
+          the_comments_base
           the_comments_highlight
           the_string_interpolate
+          the_comments_default_notificator
+          the_comments
         ].each do |file_name|
           f = "app/assets/javascripts/#{ file_name }.js.coffee"
           copy_file f, f

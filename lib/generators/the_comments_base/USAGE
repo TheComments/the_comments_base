@@ -59,3 +59,4 @@ Description:
   > rails g the_comments_base:views assets
   > rails g the_comments_base:views helper
   > rails g the_comments_base:views views
+  > rails g the_comments_base:views all
