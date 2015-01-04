@@ -4,6 +4,9 @@ Description:
   Usage: [bundle exec] rails g the_comments_base OPTION_NAME
   Usage: [bundle exec] rails g the_comments_base:views OPTION_NAME
 
+# MIGRATIONS::
+  > rake the_comments_base_engine:install:migrations
+
 # This text:
   > rails g the_comments_base --help
 
@@ -56,6 +59,3 @@ Description:
   > rails g the_comments_base:views assets
   > rails g the_comments_base:views helper
   > rails g the_comments_base:views views
-
-# Migrations:
-  > rake the_comments_base_engine:install:migrations
