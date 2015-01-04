@@ -5,6 +5,11 @@ class TheCommentsBaseGenerator < Rails::Generators::NamedBase
   # > rails g the_comments_base OPTION_NAME
   def generate_controllers
     case gen_name
+      when 'install'
+        # > rails g the_comments_base install
+        cp_models
+        cp_controllers
+        cp_config
       when 'models'
         # > rails g the_comments_base models
         cp_models
@@ -23,11 +28,6 @@ class TheCommentsBaseGenerator < Rails::Generators::NamedBase
         cp_controllers
         cp_config
         cp_locales
-      when 'install'
-        # > rails g the_comments_base install
-        cp_models
-        cp_controllers
-        cp_config
       else
         puts 'TheComments Generator - wrong Name'
         puts 'Try to use [ install | models | controllers | config | locales | all ]'

@@ -14,8 +14,6 @@ Description:
     app/models/comment.rb
     app/controllers/comments_controller.rb
     config/initializers/the_comments_base.rb
-    config/locales/en.the_comments_base.yml
-    config/locales/ru.the_comments_base.yml
 
 # Model generators:
   > rails g the_comments_base models
@@ -39,6 +37,16 @@ Description:
   > rails g the_comments_base locales
 
   This will generate:
+    config/locales/en.the_comments_base.yml
+    config/locales/ru.the_comments_base.yml
+
+# All generators:
+  > rails g the_comments_base all
+
+  This will create:
+    app/models/comment.rb
+    app/controllers/comments_controller.rb
+    config/initializers/the_comments_base.rb
     config/locales/en.the_comments_base.yml
     config/locales/ru.the_comments_base.yml
 
