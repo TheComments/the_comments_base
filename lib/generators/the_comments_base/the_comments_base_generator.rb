@@ -2,8 +2,7 @@ class TheCommentsBaseGenerator < Rails::Generators::NamedBase
   source_root File.expand_path('../templates', __FILE__)
   # argument :xname, type: :string, default: :xname
 
-  # > rails g the_comments_base NAME
-  # example: rails g the_comments_base controllers
+  # > rails g the_comments_base OPTION_NAME
   def generate_controllers
     case gen_name
       when 'models'
@@ -18,15 +17,20 @@ class TheCommentsBaseGenerator < Rails::Generators::NamedBase
       when 'locales'
         # > rails g the_comments_base locales
         cp_locales
+      when 'all'
+        # > rails g the_comments_base all
+        cp_models
+        cp_controllers
+        cp_config
+        cp_locales
       when 'install'
         # > rails g the_comments_base install
         cp_models
         cp_controllers
         cp_config
-        cp_locales
       else
         puts 'TheComments Generator - wrong Name'
-        puts 'Try to use [ install | models controllers | config | locales ]'
+        puts 'Try to use [ install | models | controllers | config | locales | all ]'
     end
   end
 
@@ -41,14 +45,12 @@ class TheCommentsBaseGenerator < Rails::Generators::NamedBase
   def cp_models
     _path = "#{ root_path }/app/models/_templates_"
 
-    # comment_subscription.rb
     %w[ comment.rb ].each do |file_name|
       copy_file "#{ _path }/#{ file_name }", "app/models/#{ file_name }"
     end
   end
 
   def cp_controllers
-    # comment_subscriptions_controller.rb
     _path = "#{ root_path }/app/controllers/_templates_"
     %w[ comments_controller.rb ].each do |file_name|
       copy_file "#{ _path }/#{ file_name }", "app/controllers/#{ file_name }"

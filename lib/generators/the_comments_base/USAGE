@@ -1,5 +1,5 @@
 Description:
-  TheComments: generators will copy files to install TheComments 3.0 into your App
+  TheCommentsBase: generators will copy files to install TheComments 3.0 into your App
 
   Usage: [bundle exec] rails g the_comments_base OPTION_NAME
   Usage: [bundle exec] rails g the_comments_base:views OPTION_NAME
@@ -31,6 +31,9 @@ Description:
 
 # Config generators:
   > rails g the_comments_base config
+
+  This will generate:
+    config/initializers/the_comments_base.rb
 
 # Locales generators:
   > rails g the_comments_base locales
