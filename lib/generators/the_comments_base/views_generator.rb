@@ -59,21 +59,13 @@ BANNER
       end
 
       def js_copy
-        %w[
-          the_comments_base
-          the_comments_highlight
-          the_string_interpolate
-          the_comments_default_notificator
-          the_comments
-        ].each do |file_name|
-          f = "app/assets/javascripts/#{ file_name }.js.coffee"
-          copy_file f, f
-        end
+        d1 = "app/assets/javascripts"
+        directory d1, d1
       end
 
       def css_copy
-        f1 = "app/assets/stylesheets/the_comments_base.css.scss"
-        copy_file f1, f1
+        d1 = "app/assets/stylesheets"
+        directory d1, d1
       end
 
       def views_copy
@@ -82,8 +74,8 @@ BANNER
       end
 
       def helper_copy
-        f1 = "app/helpers/render_comments_tree_helper.rb"
-        copy_file f1, f1
+        d1 = "app/helpers"
+        directory d1, d1
       end
     end
   end

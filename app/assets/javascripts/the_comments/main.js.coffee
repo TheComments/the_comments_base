@@ -1,5 +1,6 @@
-#= require ./the_string_interpolate
-#= require ./the_comments_highlight
+# dependency: string_interpolate
+# dependency: the_comments/highlight
+# dependency: Notificator
 
 # BASE HELPERS
 @unixsec = (t) -> Math.round(t.getTime() / 1000)

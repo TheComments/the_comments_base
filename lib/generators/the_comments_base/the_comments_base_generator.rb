@@ -1,5 +1,6 @@
 class TheCommentsBaseGenerator < Rails::Generators::NamedBase
-  source_root File.expand_path('../templates', __FILE__)
+  source_root TheCommentsBase::Engine.root
+  # source_root File.expand_path('../templates', __FILE__)
   # argument :xname, type: :string, default: :xname
 
   # > rails g the_comments_base OPTION_NAME
@@ -36,37 +37,27 @@ class TheCommentsBaseGenerator < Rails::Generators::NamedBase
 
   private
 
-  def root_path; TheCommentsBase::Engine.root; end
+  # def root_path; TheCommentsBase::Engine.root; end
 
   def gen_name
     name.to_s.downcase
   end
 
   def cp_models
-    _path = "#{ root_path }/app/models/_templates_"
-
-    %w[ comment.rb ].each do |file_name|
-      copy_file "#{ _path }/#{ file_name }", "app/models/#{ file_name }"
-    end
+    directory "app/models/_templates_", "app/models"
   end
 
   def cp_controllers
-    _path = "#{ root_path }/app/controllers/_templates_"
-    %w[ comments_controller.rb ].each do |file_name|
-      copy_file "#{ _path }/#{ file_name }", "app/controllers/#{ file_name }"
-    end
+    directory "app/controllers/_templates_", "app/controllers"
   end
 
   def cp_config
-    copy_file "#{ root_path }/config/initializers/the_comments_base.rb",
-              "config/initializers/the_comments_base.rb"
+    d1 = "config/initializers"
+    directory d1, d1
   end
 
   def cp_locales
-    _path = "#{ root_path }/config/locales"
-
-    %w[ en.the_comments_base.yml ru.the_comments_base.yml ].each do |file_name|
-      copy_file "#{ _path }/#{ file_name }", "config/locales/#{ file_name }"
-    end
+    d1 = "config/locales"
+    directory d1, d1
   end
 end
