@@ -1,21 +1,21 @@
-module TheComments
+module TheCommentsBase
   module Generators
     class ViewsGenerator < Rails::Generators::NamedBase
-      source_root TheComments::Engine.root
+      source_root TheCommentsBase::Engine.root
 
       def self.banner
 <<-BANNER.chomp
 
-USAGE: [bundle exec] rails g the_comments:views NAME
+USAGE: [bundle exec] rails g the_comments_base:views OPTION_NAME
 
-> rails g the_comments:views js
-> rails g the_comments:views css
-> rails g the_comments:views assets
+> rails g the_comments_base:views js
+> rails g the_comments_base:views css
+> rails g the_comments_base:views assets
 
-> rails g the_comments:views views
-> rails g the_comments:views helper
+> rails g the_comments_base:views views
+> rails g the_comments_base:views helper
 
-> rails g the_comments:views all
+> rails g the_comments_base:views all
 
 BANNER
       end
@@ -33,14 +33,19 @@ BANNER
       def copy_gem_files
         case param_name
           when 'js'
+            # rails g the_comments_base:views js
             js_copy
           when 'css'
+            # rails g the_comments_base:views css
             css_copy
           when 'assets'
+            # rails g the_comments_base:views assets
             js_copy; css_copy
           when 'views'
+            # rails g the_comments_base:views views
             views_copy
           when 'helper'
+            # rails g the_comments_base:views helper
             helper_copy
           when 'all'
             js_copy
@@ -48,20 +53,25 @@ BANNER
             views_copy
             helper_copy
           else
-            puts 'TheComments View Generator - wrong Name'
+            puts 'TheCommentsBase View Generator - wrong Name'
             puts "Wrong params - use only [ js | css | assets | views | helper | all ] values"
         end
       end
 
       def js_copy
-        f1 = "app/assets/javascripts/the_comments.js.coffee"
-        f2 = "app/assets/javascripts/the_comments_manage.js.coffee"
-        copy_file f1, f1
-        copy_file f2, f2
+        %w[
+          the_comments
+          the_comments_default_notificator
+          the_comments_highlight
+          the_string_interpolate
+        ].each do |file_name|
+          f = "app/assets/javascripts/#{ file_name }.js.coffee"
+          copy_file f, f
+        end
       end
 
       def css_copy
-        f1 = "app/assets/stylesheets/the_comments.css.scss"
+        f1 = "app/assets/stylesheets/the_comments_base.css.scss"
         copy_file f1, f1
       end
 

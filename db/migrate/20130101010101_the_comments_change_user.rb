@@ -1,4 +1,3 @@
-# null: false => de-facto db-level validation
 class TheCommentsChangeUser < ActiveRecord::Migration
   def change
     change_table :users do |t|

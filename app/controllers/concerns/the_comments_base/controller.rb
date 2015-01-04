@@ -1,17 +1,17 @@
 # class CommentsController < ApplicationController
-#   include TheComments::Controller
+#   include TheCommentsBase::Controller
 # end
 
-module TheComments
+module TheCommentsBase
   module Controller
     extend ActiveSupport::Concern
 
     included do
       before_action -> { @errors = {} }, only: :create
 
-      include ::TheComments::ViewToken
-      include ::TheComments::SpamTraps
-      include ::TheComments::ManageActions
+      include ::TheCommentsBase::ViewToken
+      include ::TheCommentsBase::SpamTraps
+      include ::TheCommentsBase::ManageActions
 
       before_action :define_commentable, only: :create
 

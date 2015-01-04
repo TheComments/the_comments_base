@@ -1,4 +1,4 @@
-module TheComments
+module TheCommentsBase
   module User
     extend ActiveSupport::Concern
 

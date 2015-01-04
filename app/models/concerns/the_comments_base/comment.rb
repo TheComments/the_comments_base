@@ -1,4 +1,4 @@
-module TheComments
+module TheCommentsBase
   module Comment
     extend ActiveSupport::Concern
 
@@ -19,7 +19,7 @@ module TheComments
       #
       include ::TheSimpleSort::Base
       include ::TheSortableTree::Scopes
-      include ::TheComments::CommentStates
+      include ::TheCommentsBase::CommentStates
       include ::TheCommentsAntispamServices::Base
       include ::TheCommentsSubscriptions::Comment
 

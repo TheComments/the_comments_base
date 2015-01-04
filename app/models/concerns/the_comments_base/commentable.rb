@@ -1,4 +1,4 @@
-module TheComments
+module TheCommentsBase
   module Commentable
 
     extend ActiveSupport::Concern

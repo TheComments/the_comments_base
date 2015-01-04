@@ -1,4 +1,4 @@
-module TheComments
+module TheCommentsBase
   module CommentStates
     extend ActiveSupport::Concern
 
