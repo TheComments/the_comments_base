@@ -11,7 +11,7 @@ module TheCommentsBase
 
       include ::TheCommentsBase::ViewToken
       include ::TheCommentsBase::SpamTraps
-      include ::TheCommentsBase::ManageActions
+      include ::TheCommentsManager::Actions
 
       before_action :define_commentable, only: :create
 
