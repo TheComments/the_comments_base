@@ -4,7 +4,7 @@ class TheCommentsCreateComments < ActiveRecord::Migration
       # relations
       t.integer :user_id
       t.integer :holder_id
-      
+
       # polymorphic, commentable object
       t.integer :commentable_id
       t.string  :commentable_type
@@ -16,7 +16,7 @@ class TheCommentsCreateComments < ActiveRecord::Migration
 
       # comment
       t.string :anchor
-      
+
       t.string :title
       t.string :contacts
 
