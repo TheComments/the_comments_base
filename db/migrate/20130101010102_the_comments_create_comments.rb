@@ -29,7 +29,7 @@ class TheCommentsCreateComments < ActiveRecord::Migration
       # STATES: %w[ draft published deleted ]
       # Please, keep field `state` blank
       # Reason: the_comments_base/app/models/concerns/the_comments_base/comment_states.rb:10
-      t.string :state, default: :draft
+      t.string :state, default: ''
 
       # base user data (BanHammer power)
       t.string  :ip,             default: :undefined
