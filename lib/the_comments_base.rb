@@ -6,6 +6,11 @@ require "the_comments_base/config"
 require 'jbuilder'
 require 'the_notification'
 require 'the_sortable_tree'
+require 'awesome_nested_set'
+
+require 'slim'
+require 'the_data_role_block_slim'
+require 'the_data_role_block_jquery'
 
 require 'state_machine'
 require 'state_machine/version'

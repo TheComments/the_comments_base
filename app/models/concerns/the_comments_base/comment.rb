@@ -1,3 +1,6 @@
+# make sure that is loaded
+require 'awesome_nested_set'
+
 module TheCommentsBase
   module Comment
     extend ActiveSupport::Concern
@@ -17,11 +20,12 @@ module TheCommentsBase
       # 3. TheSortableTree
       # 4. Comments State Machine
       #
-      include ::TheSimpleSort::Base
       include ::TheSortableTree::Scopes
       include ::TheCommentsBase::CommentStates
-      include ::TheCommentsAntispamServices::Base
-      include ::TheCommentsSubscriptions::Comment
+
+      include ::TheSimpleSort::Base               if defined? ::TheSimpleSort
+      include ::TheCommentsSubscriptions::Comment if defined? ::TheCommentsSubscriptions
+      include ::TheCommentsAntispamServices::Base if defined? ::TheCommentsAntispamServices
 
       validates :raw_content, presence: true
 

@@ -3,7 +3,7 @@ module TheCommentsBase
     extend ActiveSupport::Concern
 
     included do
-      include ::TheCommentsSubscriptions::Relations
+      include ::TheCommentsSubscriptions::Relations if defined? ::TheCommentsSubscriptions
 
       has_many :comcoms, class_name: :Comment, foreign_key: :holder_id
     end

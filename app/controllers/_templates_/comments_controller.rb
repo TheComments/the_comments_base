@@ -7,7 +7,7 @@ class CommentsController < ApplicationController
   # before_action :owner_required, except: %w[index create]
   # before_action :admin_required, only:   %w[total_draft total_published total_deleted total_spam]
 
-  include TheCommentsBase::Controller
+  include ::TheCommentsBase::Controller
 
   # >>> include TheCommentsBase::Controller <<<
   # (!) Almost all methods based on *current_user* method
@@ -26,7 +26,7 @@ class CommentsController < ApplicationController
   # You can redifine it for your purposes
   #
   # private
-  # %w[ comment_template comment_partial ]
+  # %w[ the_comments_template ]
   # %w[ denormalized_fields request_data_for_comment define_commentable ]
   # %w[ comment_params patch_comment_params ]
   # %w[ ajax_requests_required cookies_required ]

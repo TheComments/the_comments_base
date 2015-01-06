@@ -2,9 +2,9 @@
 
 = form_for Comment.new, remote: true, id: nil, data: { type: :json, role: :new_comment }, authenticity_token: true do |f|
   - if current_user
-    = render partial: comment_template('tree/form.logined'), locals: { f: f, commentable: commentable }
+    = render partial: the_comments_template('tree/form.logined'), locals: { f: f, commentable: commentable }
   - else
-    = render partial: comment_template('tree/form.guest'), locals: { f: f, commentable: commentable }
+    = render partial: the_comments_template('tree/form.guest'), locals: { f: f, commentable: commentable }
 
   p
     = f.check_box :subscribe_to_thread_flag, { autocomplete: :off, checked: true }, true, false

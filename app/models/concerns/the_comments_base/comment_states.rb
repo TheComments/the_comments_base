@@ -3,9 +3,16 @@ module TheCommentsBase
     extend ActiveSupport::Concern
 
     included do
-      # :draft | :published | :deleted
-      state_machine :state, initial: TheCommentsBase.config.default_state do
+      # STATES: :draft | :published | :deleted
 
+      # StateMachine - known issue
+      # `initial` param doesn't work
+      # `initial: TheCommentsBase.config.default_state`
+      # replaced with `before_save` filter
+
+      before_save { self.state = TheCommentsBase.config.default_state }
+
+      state_machine :state do
         # events
         event :to_draft do
           transition all - :draft => :draft

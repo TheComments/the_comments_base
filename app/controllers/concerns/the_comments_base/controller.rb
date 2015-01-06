@@ -1,5 +1,5 @@
 # class CommentsController < ApplicationController
-#   include TheCommentsBase::Controller
+#   include ::TheCommentsBase::Controller
 # end
 
 module TheCommentsBase
@@ -11,7 +11,8 @@ module TheCommentsBase
 
       include ::TheCommentsBase::ViewToken
       include ::TheCommentsBase::SpamTraps
-      include ::TheCommentsManager::Actions
+
+      include ::TheCommentsManager::Actions if defined? ::TheCommentsManager
 
       before_action :define_commentable, only: :create
 
@@ -28,27 +29,27 @@ module TheCommentsBase
 
       if @comment.save
         comment_after_create_actions
-        render template: view_context.comment_template('tree/create.success')
+        render template: view_context.the_comments_template('tree/create.success')
       else
-        render template: view_context.comment_template('tree/create.errors'), status: 422
+        render template: view_context.the_comments_template('tree/create.errors'), status: 422
       end
     end
 
     private
 
     def comment_after_create_actions
+      # Add subscriber by Email or UserId
+      # app/models/concerns/the_comments/comment_subscription.rb
+      @comment.try(:add_subscriber, current_user)
+
       # Something happened. They should know
       # ::Async::
-      @comment.send_notifications_to_subscribers
+      @comment.try(:send_notifications_to_subscribers)
 
       # app/models/concerns/the_comments/anti_spam.rb
       # Check with anti-spam services
       # ::Async::
-      @comment.antispam_services_check(request)
-
-      # Add subscriber by Email or UserId
-      # app/models/concerns/the_comments/comment_subscription.rb
-      @comment.add_subscriber(current_user)
+      @comment.try(:antispam_services_check, request)
     end
 
     def define_commentable

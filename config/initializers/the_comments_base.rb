@@ -11,9 +11,9 @@ TheCommentsBase.configure do |config|
   config.empty_trap_protection     = true
   config.tolerance_time_protection = true
 
-  # config.yandex_cleanweb_api_key  = nil
-  # config.akismet_api_key          = nil
-  # config.akismet_blog             = nil
+  # config.yandex_cleanweb_api_key = nil
+  # config.akismet_api_key         = nil
+  # config.akismet_blog            = nil
 
   config.default_mailer_email = 'the-comments@for-ruby-on-rails.domain'
   config.async_processing     = false
