@@ -8,9 +8,11 @@ module TheCommentsBase
       # StateMachine - known issue
       # `initial` param doesn't work
       # `initial: TheCommentsBase.config.default_state`
-      # replaced with `before_save` filter
+      # solved with `before_save` method and blank value in migration
 
-      before_save { self.state = TheCommentsBase.config.default_state }
+      before_save do
+        self.state = TheCommentsBase.config.default_state if self.state.blank?
+      end
 
       state_machine :state do
         # events
