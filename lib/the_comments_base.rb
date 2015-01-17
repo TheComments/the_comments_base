@@ -12,8 +12,7 @@ require 'slim'
 require 'the_data_role_block_slim'
 require 'the_data_role_block_jquery'
 
-require 'state_machine'
-require 'state_machine/version'
+require 'aasm'
 
 module TheCommentsBase
   class Engine < Rails::Engine
@@ -38,19 +37,3 @@ end
 
 # Routing cocerns loading
 require "#{ _root_ }/config/routes"
-
-if StateMachine::VERSION.to_f <= 1.2
-  puts '~' * 50
-  puts 'WARNING!'
-  puts '~' * 50
-  puts 'TheComments >>> StateMachine patch for Rails 4 will be applied'
-  puts
-  puts '> private method *around_validation* from StateMachine::Integrations::ActiveModel will be public'
-  puts
-  puts 'https://github.com/pluginaweek/state_machine/issues/295'
-  puts 'https://github.com/pluginaweek/state_machine/issues/251'
-  puts '~' * 50
-  module StateMachine::Integrations::ActiveModel
-    public :around_validation
-  end
-end

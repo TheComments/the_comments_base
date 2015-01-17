@@ -18,8 +18,8 @@ Gem::Specification.new do |spec|
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
   spec.require_paths = ["lib"]
 
+  spec.add_dependency 'aasm', '~> 4.0'
   spec.add_dependency 'awesome_nested_set'
-  spec.add_dependency 'state_machine',     '~> 1.2.0'
   spec.add_dependency 'the_sortable_tree', '~> 2.5.0'
   spec.add_dependency 'the_notification',  '~> 0.0.1'
 
