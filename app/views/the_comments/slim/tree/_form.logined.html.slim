@@ -1,7 +1,7 @@
 .logined_comment_form
   .user_data
     = link_to user_path(current_user), nopin: :nopin do
-      = image_tag current_user.try(:avatar).try(:url, :thumb)
+      = image_tag current_user.comment_image_path, width: 50
   .comment_data
     = render partial: the_comments_template('tree/form.hidden_fields'), locals: { f: f, commentable: commentable }
 

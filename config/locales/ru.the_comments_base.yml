@@ -3,6 +3,7 @@ ru:
     new: Новый Комментаий
     reply: Ответить
     subscribe_to_thread: Подписаться на тему
+    waiting_for_moderation: Ожидает модерации
 
     form:
       title:    Заголовок

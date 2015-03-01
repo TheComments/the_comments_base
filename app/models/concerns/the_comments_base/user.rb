@@ -8,6 +8,12 @@ module TheCommentsBase
       has_many :comcoms, class_name: :Comment, foreign_key: :holder_id
     end
 
+    def comment_image_path
+      src  = id.to_s
+      hash = Digest::MD5.hexdigest(src)
+      "https://2.gravatar.com/avatar/#{ hash }?s=42&d=https://identicons.github.com/#{ hash }.png"
+    end
+
     def my_comments; ::Comment.where(user: self); end
 
     %w[ draft published deleted ].each do |state|

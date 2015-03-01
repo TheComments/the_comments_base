@@ -3,6 +3,7 @@ en:
     new: New
     reply: Reply
     subscribe_to_thread: Subscribe to thread
+    waiting_for_moderation: Waiting for Moderation
 
     form:
       title:    Title
