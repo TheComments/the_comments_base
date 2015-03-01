@@ -1,1 +1,12 @@
 en:
+  the_comments:
+    new: New
+    reply: Reply
+    subscribe_to_thread: Subscribe to thread
+
+    form:
+      title:    Title
+      contacts: Contacts
+      content:  Content *
+      create: Create
+      thank_you: "Thank you!"

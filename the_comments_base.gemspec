@@ -20,6 +20,7 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency 'aasm', '~> 4.0'
   spec.add_dependency 'awesome_nested_set'
+
   spec.add_dependency 'the_sortable_tree', '~> 2.5.0'
   spec.add_dependency 'the_notification',  '~> 0.0.1'
 
