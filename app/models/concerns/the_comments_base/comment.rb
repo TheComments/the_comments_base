@@ -1,6 +1,7 @@
 # make sure that is loaded
 require 'awesome_nested_set'
 
+# include ::TheCommentsBase::Comment
 module TheCommentsBase
   module Comment
     extend ActiveSupport::Concern

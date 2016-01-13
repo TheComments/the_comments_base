@@ -4,7 +4,7 @@ require "the_comments_base/version"
 require "the_comments_base/config"
 
 require 'jbuilder'
-require 'the_notification'
+require 'notifications'
 require 'the_sortable_tree'
 require 'awesome_nested_set'
 
