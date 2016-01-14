@@ -115,7 +115,9 @@
       # reset 'new comment' forms
       $(@comment_forms).hide()
       $('@reply_comments_form').remove()
-      form = $('@new_comment').clone().addRole('reply_comments_form')
+
+      form = $('@new-nested-comment').clone().addRole('reply_comments_form').removeClass('hidden')
+      form.find('form').show()
 
       comment_id = comment.data('comment-id')
       $("@parent_id", form).val comment_id

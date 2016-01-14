@@ -29,9 +29,9 @@ module TheCommentsBase
 
       if @comment.save
         comment_after_create_actions
-        render template: view_context.the_comments_template('tree/create.success')
+        render template: 'the_comments/tree/create.success'
       else
-        render template: view_context.the_comments_template('tree/create.errors'), status: 422
+        render template: 'the_comments/tree/create.errors', status: 422
       end
     end
 

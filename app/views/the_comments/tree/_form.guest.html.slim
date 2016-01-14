@@ -1,0 +1,21 @@
+.ptz--table.w100p.mb10
+  .ptz--tr
+    .ptz--td.w50p
+      .mb5.fs14 Ваше имя
+      = f.text_field :title, class: 'ptz--input ptz--size-14 w100p'
+    .ptz--td
+      .w20 &nbsp;
+    .ptz--td.w50p
+      .mb5.fs14 Контакты (не публикуются)
+      = f.text_field :contacts, class: 'ptz--input ptz--size-14 w100p'
+
+
+.mb20
+  .mb5.fs14= t('the_comments.form.content')
+  = f.text_area :raw_content, class: 'ptz--textarea ptz--size-16 w100p', rows: 10
+
+.the_comments--trap
+  - TheCommentsBase.config.empty_inputs.each do |name|
+    = text_field_tag name, nil, autocomplete: :off, tabindex: -1, id: nil
+
+= render partial: 'the_comments/tree/form.hidden_fields', locals: { f: f, commentable: commentable }

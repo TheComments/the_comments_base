@@ -1,0 +1,6 @@
+.mb20= link_to "Новый комментарий", '#', class: 'fs20 the_comments--new-comment-link', data: { role: :new_root_comment }
+
+= render template: 'the_comments/tree/form', locals: { commentable: commentable }
+
+.hidden.app--div-0.mt20.mb20.ml20.p20(data-role='new-nested-comment')
+  = render template: 'the_comments/tree/form', locals: { commentable: commentable }

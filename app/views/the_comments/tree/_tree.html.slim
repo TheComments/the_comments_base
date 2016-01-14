@@ -1,0 +1,5 @@
+.comments@comments
+  ol.comments_tree@comments_tree@tolarance_time_holder data={ comments: { tolarance_time: TheCommentsBase.config.tolerance_time  } }
+    = render partial: 'the_comments/tree/comment', locals: { tree: comments_tree }
+
+  = render partial: 'the_comments/form', locals: { commentable: commentable }
