@@ -12,22 +12,28 @@ module TheCommentsBase
 
       validates_inclusion_of :state, in: COMMENT_STATES
 
+      before_validation ->{
+        self.state = 'draft' if self.state.blank?
+      }
 
-      before_save ->{ @state_change = state_change if state_changed? }
+      before_save ->{
+        @state_change = state_change if state_changed?
+      }
+
       after_save :process_state_changes!
 
-      COMMENT_STATES.each do |state|
-        define_method "#{ state }?" do
-          self.send(state).to_s == state.to_s
+      COMMENT_STATES.each do |_state_|
+        define_method "#{ _state_ }?" do
+          self.state.to_s == _state_.to_s
         end
 
-        define_method "#{ state }!" do
-          self.send("state=", state)
+        define_method "#{ _state_ }!" do
+          self.send("state=", _state_)
           save!
         end
 
-        define_method "to_#{ state }" do
-          self.send("state=", state)
+        define_method "to_#{ _state_ }" do
+          self.send("state=", _state_)
           save!
         end
       end # STATES.each
