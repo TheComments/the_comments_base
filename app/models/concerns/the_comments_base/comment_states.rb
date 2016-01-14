@@ -7,38 +7,37 @@ module TheCommentsBase
     end
 
     included do
-      include ::AASM
-
       scope :with_state, ->(states) { where state: Array.wrap(states) }
 
-      aasm column: :state, whiny_transitions: true do
-        # state :draft,     initial: true
-        # state :published, initial: false
-        # state :deleted,   initial: false
-        ::Comment::COMMENT_STATES.each do |_state|
-          state _state, initial: _state == TheCommentsBase.config.default_state.to_sym
-        end
+      # include ::AASM
+      # aasm column: :state, whiny_transitions: true do
+      #   # state :draft,     initial: true
+      #   # state :published, initial: false
+      #   # state :deleted,   initial: false
+      #   # ::Comment::COMMENT_STATES.each do |_state|
+      #   #   state _state, initial: _state == TheCommentsBase.config.default_state.to_sym
+      #   # end
 
-        # event: to_draft
-        # event: to_published
-        # event: to_deleted
-        ::Comment::COMMENT_STATES.each do |_state|
-          event "to_#{ _state }", after_commit: :update_the_comments_counters do
-            before do
-              @from = state.to_sym
-              @from = TheCommentsBase.config.default_state.to_sym if @from.blank?
-            end
+      #   # event: to_draft
+      #   # event: to_published
+      #   # event: to_deleted
+      #   # ::Comment::COMMENT_STATES.each do |_state|
+      #   #   event "to_#{ _state }", after_commit: :update_the_comments_counters do
+      #   #     before do
+      #   #       @from = state.to_sym
+      #   #       @from = TheCommentsBase.config.default_state.to_sym if @from.blank?
+      #   #     end
 
-            after do
-              @to = state.to_sym
-            end
+      #   #     after do
+      #   #       @to = state.to_sym
+      #   #     end
 
-            transitions \
-              from: ::Comment::COMMENT_STATES - [_state],
-              to: _state
-          end
-        end
-      end
+      #   #     transitions \
+      #   #       from: ::Comment::COMMENT_STATES - [_state],
+      #   #       to: _state
+      #   #   end
+      #   # end
+      # end
 
       def update_the_comments_counters
         define_common_aasm_variables
