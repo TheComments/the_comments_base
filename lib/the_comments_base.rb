@@ -12,8 +12,6 @@ require 'slim'
 require 'the_data_role_block_slim'
 require 'the_data_role_block_jquery'
 
-require 'aasm'
-
 module TheCommentsBase
   class Engine < Rails::Engine
     # http://stackoverflow.com/questions/24244519

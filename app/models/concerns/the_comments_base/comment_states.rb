@@ -2,55 +2,61 @@ module TheCommentsBase
   module CommentStates
     extend ActiveSupport::Concern
 
-    class_methods do
-      COMMENT_STATES = %i[ draft published deleted ]
-    end
+    COMMENT_STATES = %w[ draft published deleted ]
 
     included do
       scope :with_state, ->(states) { where state: Array.wrap(states) }
+      scope :draft,      ->{ with_state :draft     }
+      scope :published,  ->{ with_state :published }
+      scope :deleted,    ->{ with_state :deleted   }
 
-      # include ::AASM
-      # aasm column: :state, whiny_transitions: true do
-      #   # state :draft,     initial: true
-      #   # state :published, initial: false
-      #   # state :deleted,   initial: false
-      #   # ::Comment::COMMENT_STATES.each do |_state|
-      #   #   state _state, initial: _state == TheCommentsBase.config.default_state.to_sym
-      #   # end
+      validates_inclusion_of :state, in: COMMENT_STATES
 
-      #   # event: to_draft
-      #   # event: to_published
-      #   # event: to_deleted
-      #   # ::Comment::COMMENT_STATES.each do |_state|
-      #   #   event "to_#{ _state }", after_commit: :update_the_comments_counters do
-      #   #     before do
-      #   #       @from = state.to_sym
-      #   #       @from = TheCommentsBase.config.default_state.to_sym if @from.blank?
-      #   #     end
 
-      #   #     after do
-      #   #       @to = state.to_sym
-      #   #     end
+      before_save ->{ @state_change = state_change if state_changed? }
+      after_save :process_state_changes!
 
-      #   #     transitions \
-      #   #       from: ::Comment::COMMENT_STATES - [_state],
-      #   #       to: _state
-      #   #   end
-      #   # end
-      # end
+      COMMENT_STATES.each do |state|
+        define_method "#{ state }?" do
+          self.send(state).to_s == state.to_s
+        end
 
-      def update_the_comments_counters
+        define_method "#{ state }!" do
+          self.send("state=", state)
+          save!
+        end
+
+        define_method "to_#{ state }" do
+          self.send("state=", state)
+          save!
+        end
+      end # STATES.each
+
+      def process_state_changes!
+        return false if @state_change.blank?
+        state_changes = @state_change
         define_common_aasm_variables
 
-        # between delete, draft and published
-        if %i[ draft published deleted ].include?(@from) && %i[ draft published ].include?(@to)
-          move_from_any_to_draft_or_published
+        @from = @state_change.first
+        @to   = @state_change.last
+
+        # basic life cicle
+        letter = case state_changes
+          when ['draft', 'published']
+            move_from_any_to_draft_or_published
+          when ['draft', 'deleted']
+            move_from_draft_or_published_to_deleted
+          when ['published', 'draft']
+            move_from_any_to_draft_or_published
+          when ['published', 'deleted']
+            move_from_draft_or_published_to_deleted
+          when ['deleted', 'draft']
+            move_from_any_to_draft_or_published
+          when ['deleted', 'published']
+            move_from_any_to_draft_or_published
         end
 
-        # to deleted (cascade like query)
-        if %i[ draft published ].include?(@from) && @to == :deleted
-          move_from_draft_or_published_to_deleted
-        end
+        true
       end
 
       def define_common_aasm_variables
@@ -93,3 +99,19 @@ module TheCommentsBase
     end
   end
 end
+
+# ???
+
+# def update_the_comments_counters
+#   define_common_aasm_variables
+
+#   # between delete, draft and published
+#   if %i[ draft published deleted ].include?(@from) && %i[ draft published ].include?(@to)
+#     move_from_any_to_draft_or_published
+#   end
+
+#   # to deleted (cascade like query)
+#   if %i[ draft published ].include?(@from) && @to == :deleted
+#     move_from_draft_or_published_to_deleted
+#   end
+# end
