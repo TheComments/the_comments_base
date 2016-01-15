@@ -19,7 +19,7 @@
   #####################################################
   # MODULE COMMON VARS
   #####################################################
-  comment_forms: "@new_comment, @reply_comments_form"
+  comment_forms: '@new_comment:visible'
   submits:       '@comments input[type=submit]'
 
   i18n:
@@ -31,12 +31,14 @@
   # MODULE INITIALIZER
   #####################################################
   init: (@notificator) ->
-    do @ajaxian_form_init
-    do @reply_button_init
     do @reset_tolerance_time
     do @enable_submit_button
     do @new_comment_link_init
     do @tolerance_time_protection_init
+
+    @inited ||= do =>
+      do @ajaxian_form_init
+      do @reply_button_init
 
   #####################################################
   # FORM AJAXIAN BEHAVIOR
@@ -56,6 +58,9 @@
     # AJAX:SUCCESS
     $(document).on 'ajax:success', @comment_forms, (request, data, status) =>
       form = $ request.currentTarget
+
+      log form
+
       do @enable_submit_button
 
       # clean up env
@@ -70,6 +75,8 @@
       # remove nested reply form
       if form.hasRole('reply_comments_form')
         form.fadeOut => form.remove
+
+      log 'APPEND'
 
       # append comment
       tree.append(data.comment)
@@ -116,7 +123,11 @@
       $(@comment_forms).hide()
       $('@reply_comments_form').remove()
 
-      form = $('@new-nested-comment').clone().addRole('reply_comments_form').removeClass('hidden')
+      form = $('@new-nested-comment')
+        .clone()
+        .addRole('reply_comments_form')
+        .removeClass('hidden')
+
       form.find('form').show()
 
       comment_id = comment.data('comment-id')
