@@ -59,7 +59,8 @@
     $(document).on 'ajax:success', @comment_forms, (request, data, status) =>
       form = $ request.currentTarget
 
-      log form
+      # log form
+      # debugger
 
       do @enable_submit_button
 
@@ -69,14 +70,13 @@
       @clear_comment_form()
 
       # append to nested tree or to root level?
-      tree = form.parent().siblings('@nested_set')
+      tree = form.parents('@form_holder').siblings('@nested_set')
       tree = $('@comments_tree') if tree.length is 0
 
       # remove nested reply form
       if form.hasRole('reply_comments_form')
-        form.fadeOut => form.remove
-
-      log 'APPEND'
+        form_block = form.parent()
+        form_block.fadeOut => form_block.remove
 
       # append comment
       tree.append(data.comment)
@@ -123,17 +123,19 @@
       $(@comment_forms).hide()
       $('@reply_comments_form').remove()
 
-      form = $('@new-nested-comment')
+      form_block = $('@new-nested-comment')
         .clone()
         .addRole('reply_comments_form')
         .removeClass('hidden')
 
-      form.find('form').show()
+      form = form_block.find('form')
+      form.addRole('reply_comments_form').show()
 
       comment_id = comment.data('comment-id')
       $("@parent_id", form).val comment_id
 
-      comment.siblings('@form_holder').html(form)
+      comment.siblings('@form_holder').html(form_block)
+      form_block.fadeIn()
       form.fadeIn()
       false
 
