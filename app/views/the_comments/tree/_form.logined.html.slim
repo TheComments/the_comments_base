@@ -1,13 +1,7 @@
-/ .logined_comment_form
-/   .user_data
-/     = link_to user_path(current_user), nopin: :nopin do
-/       = image_tag current_user.comment_image_path, width: 50
-
-    / = render partial: 'the_comments/tree/form.hidden_fields', locals: { f: f, commentable: commentable }
-
-    / .user_name
-    /   b= current_user.username.present? ? current_user.username : current_user.login
-
+.mb20.fs16
+  = current_user.username
 .mb20
   .mb5.fs14= t('the_comments.form.content')
   = f.text_area :raw_content, class: 'ptz--textarea ptz--size-16 w100p', rows: 10
+
+= render partial: 'the_comments/tree/form.hidden_fields', locals: { f: f, commentable: commentable }

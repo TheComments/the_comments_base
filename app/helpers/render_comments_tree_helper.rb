@@ -116,7 +116,11 @@ module RenderCommentsTreeHelper
       end
 
       def title
-        @comment.title.blank? ? t('the_comments.guest_name') : @comment.title
+        if @comment.user
+          @comment.user.username
+        else
+          @comment.title.blank? ? t('the_comments.guest_name') : @comment.title
+        end
       end
 
       def moderator_controls
