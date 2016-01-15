@@ -3,11 +3,11 @@
   highlight_anchor: ->
     hash = document.location.hash
     if hash.match('#comment_')
-      $(hash).addClass 'highlighted'
+      $(hash).addClass 'the_comments--highlighted'
 
   init: ->
     @highlight_anchor()
 
     $(window).on 'hashchange', =>
-      $('.comment.highlighted').removeClass 'highlighted'
+      $('.comment.the_comments--highlighted').removeClass 'the_comments--highlighted'
       @highlight_anchor()

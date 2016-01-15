@@ -76,7 +76,8 @@
       # remove nested reply form
       if form.hasRole('reply_comments_form')
         form_block = form.parent()
-        form_block.fadeOut => form_block.remove
+        form_block.remove()
+        # form_block.fadeOut =>
 
       # append comment
       tree.append(data.comment)
