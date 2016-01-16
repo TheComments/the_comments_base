@@ -15,6 +15,5 @@ TheCommentsBase.configure do |config|
   # config.akismet_api_key         = nil
   # config.akismet_blog            = nil
 
-  config.default_mailer_email = 'the-comments@for-ruby-on-rails.domain'
-  config.async_processing     = false
+  config.async_processing = false
 end
