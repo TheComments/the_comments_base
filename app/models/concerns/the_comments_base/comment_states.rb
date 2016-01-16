@@ -6,9 +6,12 @@ module TheCommentsBase
 
     included do
       scope :with_state, ->(states) { where state: Array.wrap(states) }
+
       scope :draft,      ->{ with_state :draft     }
       scope :published,  ->{ with_state :published }
       scope :deleted,    ->{ with_state :deleted   }
+
+      scope :for_manage, ->{ with_state %w[ draft published ] }
 
       validates_inclusion_of :state, in: COMMENT_STATES
 

@@ -21,10 +21,10 @@ module TheCommentsBase
       # 3. TheSortableTree
       # 4. Comments State Machine
       #
+      include ::SimpleSort::Base
       include ::TheSortableTree::Scopes
-      include ::TheCommentsBase::CommentStates
 
-      include ::TheSimpleSort::Base               if defined? ::TheSimpleSort
+      include ::TheCommentsBase::CommentStates
       include ::TheCommentsSubscriptions::Comment if defined? ::TheCommentsSubscriptions
       include ::TheCommentsAntispamServices::Base if defined? ::TheCommentsAntispamServices
 
