@@ -9,8 +9,6 @@ require 'the_sortable_tree'
 require 'awesome_nested_set'
 
 require 'slim'
-require 'the_data_role_block_slim'
-require 'the_data_role_block_jquery'
 
 module TheCommentsBase
   class Engine < Rails::Engine

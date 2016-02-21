@@ -18,14 +18,10 @@ Gem::Specification.new do |spec|
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
   spec.require_paths = ["lib"]
 
-  spec.add_dependency 'awesome_nested_set'
-
+  spec.add_dependency 'slim'
   spec.add_dependency 'notifications'
   spec.add_dependency 'the_sortable_tree', '> 2.5.0'
-
-  spec.add_dependency 'slim'
-  spec.add_dependency 'the_data_role_block_slim'
-  spec.add_dependency 'the_data_role_block_jquery'
+  spec.add_dependency 'awesome_nested_set'
 
   spec.add_development_dependency "bundler"
   spec.add_development_dependency "rake"
