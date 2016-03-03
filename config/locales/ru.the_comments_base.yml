@@ -1,4 +1,15 @@
 ru:
+  activerecord:
+    attributes:
+      comment:
+        raw_content: Комментарий
+    errors:
+      models:
+        comment:
+          attributes:
+            raw_content:
+              blank: 'не может быть пустым'
+
   the_comments:
     new: Новый Комментаий
     reply: Ответить
@@ -11,3 +22,5 @@ ru:
       content:  Сообщение *
       create:   Создать
       thank_you: "Спасибо!"
+
+

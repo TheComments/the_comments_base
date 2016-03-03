@@ -1,4 +1,15 @@
 en:
+  activerecord:
+    attributes:
+      comment:
+        raw_content: Comment
+    errors:
+      models:
+        comment:
+          attributes:
+            raw_content:
+              blank: "can't be blank"
+
   the_comments:
     new: New
     reply: Reply

@@ -1,1 +1,1 @@
-json.errors @comment.errors
+json.errors @comment.try(:localized_errors) || @comment.errors
