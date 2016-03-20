@@ -96,7 +96,11 @@ module RenderCommentsTreeHelper
 
             <div class='fs15'>#{ @comment.content }</div>
 
-            #{ reply }
+            <div class='clearfix mt15'>
+              <div class='pull-left'>#{ created_at }</div>
+              <div class='pull-right fs16'>#{ reply }</div>
+            </div>
+
           </div>
 
           <div class='the_comments--form_holder' data-role='form_holder'></div>
@@ -110,6 +114,11 @@ module RenderCommentsTreeHelper
 
       def anchor
         h.link_to('#', '#comment_' + @comment.anchor)
+      end
+
+      def created_at
+        date = @comment.created_at
+        date = I18n.l(date, format: "%-d %B %Y %H:%M").html_safe
       end
 
       def title
@@ -130,7 +139,7 @@ module RenderCommentsTreeHelper
 
       def reply
         if @comment.depth < (@max_reply_depth - 1)
-          "<div class='mt20 the_comments--reply_holder'>
+          "<div class='the_comments--reply_holder'>
             <a href='#' data-role='reply_link'>
               #{ t('the_comments.reply') }
             </a>
