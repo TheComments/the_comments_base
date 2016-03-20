@@ -32,7 +32,7 @@ module RenderCommentsTreeHelper
       end
 
       def moderator?
-        controller.try(:current_user).try(:comments_moderator?, @comment)
+        controller.try(:current_user).try(:admin?) || controller.try(:current_user).try(:comments_moderator?, @comment)
       end
 
       # Render Methods
@@ -78,6 +78,7 @@ module RenderCommentsTreeHelper
       def published_comment
         "<li>
           <div data-role='comment' id='comment_#{ @comment.anchor }' class='mb20 comment p10 the_comments--#{ @comment.state }' data-comment-id='#{ @comment.to_param }'>
+            #{ moderator_controls }
 
             <div class='ptz--table w100p mb15'>
               <div class='ptz--tr'>
@@ -96,7 +97,6 @@ module RenderCommentsTreeHelper
             <div class='fs15'>#{ @comment.content }</div>
 
             #{ reply }
-
           </div>
 
           <div class='the_comments--form_holder' data-role='form_holder'></div>
@@ -105,10 +105,7 @@ module RenderCommentsTreeHelper
       end
 
       def avatar
-        "<div class='userpic'>
-          <img src='#{ @comment.avatar_url }' alt='userpic' class='w50' />
-          #{ moderator_controls }
-        </div>"
+        "<img src='#{ @comment.avatar_url }' alt='userpic' class='the_comments--userpic w50' />"
       end
 
       def anchor
@@ -125,7 +122,7 @@ module RenderCommentsTreeHelper
 
       def moderator_controls
         if moderator?
-          "<div class='controls'>#{
+          "<div class='controls mb10 p5 fs13 tar the_comments--moderator_controls'>#{
             h.link_to(t('the_comments.edit'), h.edit_comment_url(@comment), class: :edit)
           }</div>"
         end
