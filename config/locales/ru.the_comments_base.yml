@@ -11,6 +11,8 @@ ru:
               blank: 'не может быть пустым'
 
   the_comments:
+    guest_name: Гость
+
     new: Новый Комментаий
     reply: Ответить
     subscribe_to_thread: Подписаться на тему
@@ -22,5 +24,3 @@ ru:
       content:  Сообщение *
       create:   Создать
       thank_you: "Спасибо!"
-
-
