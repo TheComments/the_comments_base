@@ -22,7 +22,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'awesome_nested_set'
 
   spec.add_dependency 'notifications'
-  spec.add_dependency 'the_sortable_tree', '~> 2.5.0'
+  spec.add_dependency 'the_sortable_tree', '> 2.5.0'
 
   spec.add_dependency 'slim'
   spec.add_dependency 'the_data_role_block_slim'
