@@ -56,14 +56,14 @@ module RenderCommentsTreeHelper
           "<li>
 
             <div data-role='comment' class='comment the_comments--draft p10 mb20 fs14' id='comment_#{ @comment.anchor }'>
-              <div class='ptz--table w100p'>
-                <div class='ptz--tr'>
+              <div class='ptz_table w100p'>
+                <div class='ptz_tr'>
 
-                  <div class='ptz--td tal w100p fs15'>
+                  <div class='ptz_td tal w100p fs15'>
                     #{ t('the_comments.waiting_for_moderation') }
                   </div>
 
-                  <div class='ptz--td pl20 tar fs15'>
+                  <div class='ptz_td pl20 tar fs15'>
                     #{ anchor }
                   </div>
                 </div>
@@ -80,15 +80,15 @@ module RenderCommentsTreeHelper
           <div data-role='comment' id='comment_#{ @comment.anchor }' class='mb20 comment p10 the_comments--#{ @comment.state }' data-comment-id='#{ @comment.to_param }'>
             #{ moderator_controls }
 
-            <div class='ptz--table w100p mb15'>
-              <div class='ptz--tr'>
-                <div class='ptz--td vam'>
+            <div class='ptz_table w100p mb15'>
+              <div class='ptz_tr'>
+                <div class='ptz_td vam'>
                   #{ avatar }
                 </div>
-                <div class='ptz--td pl20 tal w100p fs15'>
+                <div class='ptz_td pl20 tal w100p fs15'>
                   #{ title }
                 </div>
-                <div class='ptz--td pl20 tar fs15'>
+                <div class='ptz_td pl20 tar fs15'>
                   #{ anchor }
                 </div>
               </div>

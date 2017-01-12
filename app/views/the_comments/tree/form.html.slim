@@ -4,13 +4,13 @@
   - else
     = render partial: 'the_comments/tree/form.guest', locals: { f: f, commentable: commentable }
 
-  .ptz--table.w100p
-    .ptz--tr
-      .ptz--td.vam.pr20
-        = f.submit "Оставить комментарий", class: 'ptz--btn ptz--size-18'
-      .ptz--td.vam.pr20.fs15
+  .ptz_table.w100p
+    .ptz_tr
+      .ptz_td.vam.pr20
+        = f.submit "Оставить комментарий", class: 'ptz_btn ptz_size-18'
+      .ptz_td.vam.pr20.fs15
         = t('the_comments.form.thank_you')
-      .ptz--td.vam.tar.w100p.fs13
+      .ptz_td.vam.tar.w100p.fs13
         = f.check_box :subscribe_to_thread_flag, { autocomplete: :off, checked: true }, true, false
         '
         | Получать уведомления
